@@ -11,6 +11,7 @@ TagManager:
   - 
   - Water
   - UI
+  - Player
   - 
   - 
   - 
@@ -32,11 +33,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ship Exterior
+  - Ship Interior
+  - Player Dragging Checker
+  - Ship Dragging Collider
   m_SortingLayers:
   - name: Default
     uniqueID: 0

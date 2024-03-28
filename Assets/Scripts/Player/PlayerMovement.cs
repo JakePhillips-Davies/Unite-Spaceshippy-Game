@@ -1,5 +1,3 @@
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Space(7)]
     [SerializeField] private float groundDrag;
+    [SerializeField] private float airDrag;
+
 
     [Space(7)]
     [SerializeField] private float jumpForce;
@@ -32,13 +32,34 @@ public class PlayerMovement : MonoBehaviour
     private bool safeToUncrouch;
     private bool crouching;
 
-    private bool grounded;
+    public bool grounded;
+
+    private Vector3 parentVelocity;
+    private Vector3 prevParentVelocity;
+    private bool parented;
     
     private RaycastHit hitInfo;
     private RaycastHit hitInfoDud;
     private Rigidbody rb;
 
     //---                                ---//
+
+    private void OnTriggerStay(Collider other) {
+        // parented = true;
+
+        // parentVelocity = other.attachedRigidbody.velocity;
+
+        // rb.velocity += parentVelocity - prevParentVelocity;
+
+        // prevParentVelocity = parentVelocity;
+    }
+    private void OnTriggerEnter(Collider other) {
+        transform.SetParent(other.transform);
+    }
+    private void OnTriggerExit(Collider other) {
+        // parented = false;
+        transform.SetParent(null);
+    }
 
     void Start() 
     {
@@ -49,14 +70,16 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+
         GroundCheck();
 
         if(Input.GetKey(crouch)){
             transform.localScale = new Vector3(transform.localScale.x, 0.5f, transform.localScale.z);
             crouching = true;
         }
-        if(crouching)
+        if(crouching){
             safeToUncrouch = !(Physics.SphereCast(transform.position, 0.495f, transform.up, out hitInfoDud, 1));
+        }
         if(safeToUncrouch && !Input.GetKey(crouch)){
             transform.localScale = new Vector3(transform.localScale.x, 1, transform.localScale.z);
             crouching = false;
@@ -68,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
             Jump();
 
         MovePlayer();
+
+        Drag();
     }
 
     void GetMovement()
@@ -109,11 +134,30 @@ public class PlayerMovement : MonoBehaviour
         }
         else
             grounded = Physics.SphereCast(transform.position, 0.495f, -transform.up, out hitInfo, 0.51f);
+    }
 
-        if(grounded)
-            rb.drag = groundDrag;
-        else
-            rb.drag = 0.6f;
+    void Drag()
+    {
+        // if(parented){
+        //     rb.drag = 0;
+
+        //     Vector3 tempVel;
+        //     tempVel = rb.velocity - parentVelocity;
+
+        //     if(grounded)
+        //         tempVel = tempVel * (1 - Time.deltaTime * groundDrag);
+        //     else
+        //         tempVel = tempVel * (1 - Time.deltaTime * airDrag);
+
+        //     rb.velocity = parentVelocity + tempVel;
+        // }
+        // else{
+            if(grounded)
+                rb.drag = groundDrag;
+            else
+                rb.drag = airDrag;
+        //}
+        
     }
 
     void Jump()
