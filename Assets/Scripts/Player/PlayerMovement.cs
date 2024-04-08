@@ -33,31 +33,16 @@ public class PlayerMovement : MonoBehaviour
     private bool crouching;
 
     public bool grounded;
-
-    private Vector3 parentVelocity;
-    private Vector3 prevParentVelocity;
-    private bool parented;
     
     private RaycastHit hitInfo;
     private RaycastHit hitInfoDud;
     private Rigidbody rb;
 
     //---                                ---//
-
-    private void OnTriggerStay(Collider other) {
-        // parented = true;
-
-        // parentVelocity = other.attachedRigidbody.velocity;
-
-        // rb.velocity += parentVelocity - prevParentVelocity;
-
-        // prevParentVelocity = parentVelocity;
-    }
     private void OnTriggerEnter(Collider other) {
         transform.SetParent(other.transform);
     }
     private void OnTriggerExit(Collider other) {
-        // parented = false;
         transform.SetParent(null);
     }
 
@@ -112,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
 
         moveDirection = transform.forward * forwardInput + transform.right * rightInput;
         if(grounded){
-            moveSpeed *= Mathf.Pow(1 + Vector3.Dot(moveDirection, hitInfo.normal), 1.5f); // make the player slower on steeper terrain by multiplying movespeed by the dot product + 1
+            moveSpeed *= Mathf.Pow(1 + Vector3.Dot(moveDirection, hitInfo.normal), 1.3f); // make the player slower on steeper terrain by multiplying movespeed by the dot product + 1
             moveDirection = Vector3.ProjectOnPlane(moveDirection, hitInfo.normal);
         }
     }
@@ -138,25 +123,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Drag()
     {
-        // if(parented){
-        //     rb.drag = 0;
-
-        //     Vector3 tempVel;
-        //     tempVel = rb.velocity - parentVelocity;
-
-        //     if(grounded)
-        //         tempVel = tempVel * (1 - Time.deltaTime * groundDrag);
-        //     else
-        //         tempVel = tempVel * (1 - Time.deltaTime * airDrag);
-
-        //     rb.velocity = parentVelocity + tempVel;
-        // }
-        // else{
-            if(grounded)
-                rb.drag = groundDrag;
-            else
-                rb.drag = airDrag;
-        //}
+        if(grounded)
+            rb.drag = groundDrag;
+        else
+            rb.drag = airDrag;
         
     }
 
