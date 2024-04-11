@@ -9,6 +9,6 @@ public class ForceUp : MonoBehaviour
     private void FixedUpdate()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddForceAtPosition(transform.forward * force, transform.right * 10);
+        rb.AddForce(transform.forward * force);
     }
 }

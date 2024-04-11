@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     //---                                ---//
     private void OnTriggerEnter(Collider other) {
-        transform.SetParent(other.transform);
+        transform.SetParent(other.transform.parent);
     }
     private void OnTriggerExit(Collider other) {
         transform.SetParent(null);

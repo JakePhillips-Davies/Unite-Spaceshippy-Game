@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
@@ -14,9 +15,11 @@ public class PlayerCam : MonoBehaviour
 
     [Header("")]
     [Header("Interaction")]
-    [SerializeField] private float reach;
+    [SerializeField] private int reach;        public int getReach() { return reach; }
     private RaycastHit hit;
     [SerializeField] private KeyCode interactkey;
+
+    public Boolean ableToTurn { get; set; }
 
 
     void OnEnable()
