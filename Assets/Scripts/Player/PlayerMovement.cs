@@ -12,7 +12,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundDrag;
     [SerializeField] private float airDrag;
 
-
+    [Space(7)]
+    [SerializeField] private LayerMask mask;
+    
     [Space(7)]
     [SerializeField] private float jumpForce;
 
@@ -104,21 +106,26 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
+
+        Vector3 moveForce;
+
         if(grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 62, ForceMode.Force);
+            moveForce = moveDirection.normalized * moveSpeed * 62;
         else {
-            rb.AddForce(moveDirection.normalized * airSpeed * 62, ForceMode.Force);
-            rb.AddForce(-transform.up * 9.81f * 62, ForceMode.Force);
+            moveForce = (moveDirection.normalized * airSpeed * 62) - (transform.up * 9.81f * 62);
         }
+
+        try {rb.AddForce(moveForce, ForceMode.Force);}
+        catch {} // do nothing
     }
 
     void GroundCheck()
     {
         if(crouching){
-            grounded = Physics.SphereCast(transform.position, 0.495f, -transform.up, out hitInfo, 0.02f);
+            grounded = Physics.SphereCast(transform.position, 0.495f, -transform.up, out hitInfo, 0.02f, mask);
         }
         else
-            grounded = Physics.SphereCast(transform.position, 0.495f, -transform.up, out hitInfo, 0.51f);
+            grounded = Physics.SphereCast(transform.position, 0.495f, -transform.up, out hitInfo, 0.51f, mask);
     }
 
     void Drag()

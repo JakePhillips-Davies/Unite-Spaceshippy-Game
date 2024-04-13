@@ -5,9 +5,9 @@ public class PlayerCam : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float sensitivity;
-
     private float yRot;
     private float xRot;
+    [SerializeField] private KeyCode freeMouseKey;      public bool IsFreeLooking() { return Input.GetKey(freeMouseKey); }
 
     [Header("")]
     [Header("Body reference")]
@@ -16,28 +16,48 @@ public class PlayerCam : MonoBehaviour
     [Header("")]
     [Header("Interaction")]
     [SerializeField] private int reach;        public int getReach() { return reach; }
-    private RaycastHit hit;
     [SerializeField] private KeyCode interactkey;
+    private RaycastHit hit;
+    private Ray interactRay;        public Ray GetInteractRay() { return interactRay; }
 
     public Boolean ableToTurn { get; set; }
 
-
-    void OnEnable()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
+    private void Start() {
+        ableToTurn = true;
     }
 
     void Update()
     {
-        yRot += Input.GetAxisRaw("Mouse X") * sensitivity;
+        if(Input.GetKey(freeMouseKey)){
+            Cursor.lockState = CursorLockMode.Confined;
+            transform.localRotation = Quaternion.Euler(xRot, 0, 0);
+            body.transform.localRotation = Quaternion.Euler(0, yRot, 0);
+        }
+        else if(ableToTurn){
+            Cursor.lockState = CursorLockMode.Locked;
 
-        xRot -= Input.GetAxisRaw("Mouse Y") * sensitivity;
-        xRot = Mathf.Clamp(xRot, -90f, 90f);
+            yRot += Input.GetAxisRaw("Mouse X") * sensitivity;
 
-        transform.localRotation = Quaternion.Euler(xRot, 0, 0);
-        body.transform.localRotation = Quaternion.Euler(0, yRot, 0);
+            xRot -= Input.GetAxisRaw("Mouse Y") * sensitivity;
+            xRot = Mathf.Clamp(xRot, -90f, 90f);
+
+            transform.localRotation = Quaternion.Euler(xRot, 0, 0);
+            body.transform.localRotation = Quaternion.Euler(0, yRot, 0);
+        }
+        else{
+            transform.localRotation = Quaternion.Euler(xRot, 0, 0);
+            body.transform.localRotation = Quaternion.Euler(0, yRot, 0);
+        }
+
+        interactRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 
         //activatableHandler();
+    }
+
+    private void OnDrawGizmos() {
+        
+        Gizmos.DrawRay(transform.position, interactRay.direction * reach);
+
     }
 
     // void activatableHandler()
