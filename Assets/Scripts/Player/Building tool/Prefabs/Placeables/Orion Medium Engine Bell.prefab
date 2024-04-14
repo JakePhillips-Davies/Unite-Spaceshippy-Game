@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4781152169810863812}
   - component: {fileID: -7098805536540945661}
   m_Layer: 29
-  m_Name: AAAAAAAAA
+  m_Name: Orion Medium Engine Bell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,6 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3657012751360504174}
+  - {fileID: 6524899937778987111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-7098805536540945661
@@ -47,7 +48,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placeableAnywhere: 0
   tags:
-  - Large Engine Snap
+  - Medium Engine Snap
+--- !u!1 &6282079092603615009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6524899937778987111}
+  - component: {fileID: 2940765302014433789}
+  - component: {fileID: 7948066642073291178}
+  m_Layer: 24
+  m_Name: SnappingPoint
+  m_TagString: Fuel Injector Snap
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6524899937778987111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282079092603615009}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.29100004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4781152169810863812}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2940765302014433789
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282079092603615009}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7948066642073291178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282079092603615009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8a1da5a5462414c8faa071e560a33f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8768337648397474547
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +128,7 @@ GameObject:
   - component: {fileID: 4284105396569748955}
   - component: {fileID: 6703883874565616801}
   m_Layer: 29
-  m_Name: ShipBody.001
+  m_Name: Orion Engine Bell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +156,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8768337648397474547}
-  m_Mesh: {fileID: 7465313486186228897, guid: 52b824ddde6a9e447a7be1a4f5e4e1da, type: 3}
+  m_Mesh: {fileID: -3122727779995297687, guid: 71af740d1bcdaa445bd29cac6cdacd8d, type: 3}
 --- !u!23 &4284105396569748955
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -153,4 +220,4 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 7465313486186228897, guid: 52b824ddde6a9e447a7be1a4f5e4e1da, type: 3}
+  m_Mesh: {fileID: -3122727779995297687, guid: 71af740d1bcdaa445bd29cac6cdacd8d, type: 3}

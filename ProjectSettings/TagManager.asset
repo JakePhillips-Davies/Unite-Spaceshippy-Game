@@ -8,6 +8,8 @@ TagManager:
   - Large Engine Snap
   - Medium Engine Snap
   - Small Engine Snap
+  - Fuel Injector Snap
+  - Coolant Pipe Snap
   layers:
   - Default
   - TransparentFX

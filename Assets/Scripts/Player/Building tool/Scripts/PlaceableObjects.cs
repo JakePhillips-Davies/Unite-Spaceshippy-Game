@@ -8,6 +8,7 @@ public class PlaceableObjects : MonoBehaviour
     [Header("List")]
     [SerializeField] private List<GameObject> placeableObjects;
     private int selection;
+    private bool hasChanged = false; public bool GetHasChanged() { return hasChanged; } 
 
     [Header("")]
     [Header("Keycodes")]
@@ -15,10 +16,12 @@ public class PlaceableObjects : MonoBehaviour
     [SerializeField] private KeyCode previous;
 
     private void Update() {
-        
-        if(Input.GetKeyDown(next)) selection++;
 
-        if(Input.GetKeyDown(previous)) selection--;
+        hasChanged = false;
+        
+        if(Input.GetKeyDown(next)) {selection++; hasChanged = true;}
+
+        if(Input.GetKeyDown(previous)) {selection--; hasChanged = true;}
 
         if(selection < 0) selection = placeableObjects.Count - 1;
 

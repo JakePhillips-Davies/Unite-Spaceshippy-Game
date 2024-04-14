@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2068864707254669759
+--- !u!1 &3343022851034943859
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3907959005247206962}
-  - component: {fileID: 4376800252214343330}
-  - component: {fileID: 3900252168366499774}
-  - component: {fileID: 1524111393786521948}
+  - component: {fileID: 5798397559710702184}
+  - component: {fileID: 759498400371548052}
+  - component: {fileID: 8093376822536533889}
+  - component: {fileID: 258480705598682948}
   m_Layer: 29
-  m_Name: Sphere
+  m_Name: MK1 Fuel Injector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3907959005247206962
+--- !u!4 &5798397559710702184
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2068864707254669759}
+  m_GameObject: {fileID: 3343022851034943859}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4781152169810863812}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4376800252214343330
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!33 &759498400371548052
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2068864707254669759}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3900252168366499774
+  m_GameObject: {fileID: 3343022851034943859}
+  m_Mesh: {fileID: -7898656082935852527, guid: 71af740d1bcdaa445bd29cac6cdacd8d, type: 3}
+--- !u!23 &8093376822536533889
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2068864707254669759}
+  m_GameObject: {fileID: 3343022851034943859}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,13 +84,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1524111393786521948
-SphereCollider:
+--- !u!64 &258480705598682948
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2068864707254669759}
+  m_GameObject: {fileID: 3343022851034943859}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -102,9 +102,10 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7898656082935852527, guid: 71af740d1bcdaa445bd29cac6cdacd8d, type: 3}
 --- !u!1 &4263066698040981765
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,9 +115,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4781152169810863812}
-  - component: {fileID: 2997835188162922445}
+  - component: {fileID: -7514757903357999908}
   m_Layer: 29
-  m_Name: AAAAAAAAA 1
+  m_Name: MK1 Fuel Injector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,10 +136,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3907959005247206962}
+  - {fileID: 5798397559710702184}
+  - {fileID: 8538279074401468621}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2997835188162922445
+--- !u!114 &-7514757903357999908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,6 +152,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7593b8b1e643b4e94b2abe6b1e098a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placeableAnywhere: 1
+  placeableAnywhere: 0
   tags:
-  - Small Engine Snap
+  - Fuel Injector Snap
+--- !u!1 &8925426231023421323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8538279074401468621}
+  - component: {fileID: 305299258126133591}
+  - component: {fileID: 4809319904106264832}
+  m_Layer: 24
+  m_Name: SnappingPoint
+  m_TagString: Coolant Pipe Snap
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8538279074401468621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8925426231023421323}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.29311287, y: -0.22429435, z: -0.5662355, w: 0.73699003}
+  m_LocalPosition: {x: 0.9911, y: 0.2681, z: -2.4662}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4781152169810863812}
+  m_LocalEulerAnglesHint: {x: 10.255, y: -42.323, z: -79.05}
+--- !u!135 &305299258126133591
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8925426231023421323}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4809319904106264832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8925426231023421323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8a1da5a5462414c8faa071e560a33f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
