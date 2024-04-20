@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4781152169810863812}
   - component: {fileID: 2997835188162922445}
   m_Layer: 29
-  m_Name: Bed 1
+  m_Name: Bed 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 3068037339214818272}
   - component: {fileID: 5432560058851709797}
   m_Layer: 29
-  m_Name: Bed 1
+  m_Name: Bed 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,13 +74,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6869760626173997869}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: 0, y: 0.7072302, z: 0.7069834, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.74999994, z: 0.74999994}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4781152169810863812}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 180, z: 0}
 --- !u!33 &6881112655254777344
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -88,7 +88,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6869760626173997869}
-  m_Mesh: {fileID: 832990072642925198, guid: 71af740d1bcdaa445bd29cac6cdacd8d, type: 3}
+  m_Mesh: {fileID: -5750741593066065559, guid: 71af740d1bcdaa445bd29cac6cdacd8d, type: 3}
 --- !u!23 &3068037339214818272
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -152,4 +152,4 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 832990072642925198, guid: 71af740d1bcdaa445bd29cac6cdacd8d, type: 3}
+  m_Mesh: {fileID: -5750741593066065559, guid: 71af740d1bcdaa445bd29cac6cdacd8d, type: 3}

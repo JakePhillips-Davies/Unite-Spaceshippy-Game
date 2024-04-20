@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCam : MonoBehaviour
 {
@@ -7,7 +8,8 @@ public class PlayerCam : MonoBehaviour
     [SerializeField] private float sensitivity;
     private float yRot;
     private float xRot;
-    [SerializeField] private KeyCode freeMouseKey;      public bool IsFreeLooking() { return Input.GetKey(freeMouseKey); }
+    [SerializeField] private KeyCode freeMouseKey;
+    public bool isFreeLooking { get; set; } = false;
 
     [Header("")]
     [Header("Body reference")]
@@ -16,24 +18,23 @@ public class PlayerCam : MonoBehaviour
     [Header("")]
     [Header("Interaction")]
     [SerializeField] private int reach;        public int getReach() { return reach; }
+    [SerializeField] private int interactionReach;
     [SerializeField] private KeyCode interactkey;
+    [SerializeField] private GameObject panel;
+    [SerializeField] private Text text;
+    [Header("")]
+    [SerializeField] private GameObject buildingTool;
+    [SerializeField] private KeyCode buildingToolKey;
     private RaycastHit hit;
     private Ray interactRay;        public Ray GetInteractRay() { return interactRay; }
 
-    public Boolean ableToTurn { get; set; }
-
-    private void Start() {
-        ableToTurn = true;
-    }
-
     void Update()
     {
-        if(Input.GetKey(freeMouseKey)){
-            Cursor.lockState = CursorLockMode.Confined;
-            transform.localRotation = Quaternion.Euler(xRot, 0, 0);
-            body.transform.localRotation = Quaternion.Euler(0, yRot, 0);
+        if(Input.GetKeyDown(freeMouseKey)){
+            isFreeLooking = !isFreeLooking;
         }
-        else if(ableToTurn){
+        
+        if(!isFreeLooking){
             Cursor.lockState = CursorLockMode.Locked;
 
             yRot += Input.GetAxisRaw("Mouse X") * sensitivity;
@@ -45,13 +46,16 @@ public class PlayerCam : MonoBehaviour
             body.transform.localRotation = Quaternion.Euler(0, yRot, 0);
         }
         else{
+            Cursor.lockState = CursorLockMode.Confined;
             transform.localRotation = Quaternion.Euler(xRot, 0, 0);
             body.transform.localRotation = Quaternion.Euler(0, yRot, 0);
         }
 
         interactRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 
-        //activatableHandler();
+        activatableHandler();
+
+        if(Input.GetKeyDown(buildingToolKey)) buildingTool.SetActive(!buildingTool.activeSelf);
     }
 
     private void OnDrawGizmos() {
@@ -60,19 +64,20 @@ public class PlayerCam : MonoBehaviour
 
     }
 
-    // void activatableHandler()
-    // {
-    //     text.text = "";
-    //     panel.SetActive(false);
+    void activatableHandler()
+    {
+        text.text = "";
+        panel.SetActive(false);
 
-    //     if(Physics.Raycast(transform.position, transform.forward, out hit, reach)){
-    //         if(Input.GetKeyDown(activateKey) && (hit.transform != null) && (hit.collider.GetComponent<Activator>() != null))
-    //             hit.collider.GetComponent<Activator>().Activate();
+        if(Physics.Raycast(transform.position, transform.forward, out hit, interactionReach, LayerMask.GetMask("Activator"))){
+            Debug.Log(hit.collider);
+            if(Input.GetKeyDown(interactkey) && (hit.transform != null) && (hit.collider.GetComponent<Activator>() != null))
+                hit.collider.GetComponent<Activator>().Activate();
 
-    //         if((hit.transform != null) && (hit.collider.GetComponent<Activator>() != null)){
-    //             panel.SetActive(true);
-    //             text.text = String.Format("{0}", hit.collider.name);
-    //         }
-    //     }
-    // }
+            if((hit.transform != null) && (hit.collider.GetComponent<Activator>() != null)){
+                panel.SetActive(true);
+                text.text = String.Format("{0}", hit.collider.name);
+            }
+        }
+    }
 }

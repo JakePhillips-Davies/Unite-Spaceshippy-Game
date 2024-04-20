@@ -15,14 +15,15 @@ public class BuildingTool : MonoBehaviour
 
     private GameObject rotationAxis;
     private bool isGrabbing;
-    float lastAngle;
+    Quaternion initialRotation;
     Vector3 intesectionPoint;
     Vector3 firstVectorToIntersectionPoint;
 
+    public bool roundingPosition { get; set; } = true;
     private string snapTag;
     private bool snapped;
 
-    private GameObject placing;
+    private GameObject objectToBePlaced;
     private bool isPlaceable;
 
     private RaycastHit hit;
@@ -40,19 +41,26 @@ public class BuildingTool : MonoBehaviour
 
         isPlaceable = CheckPlaceability();
 
-        if(placeableObjects.GetHasChanged()) DestroyPlacing();
+        if(placeableObjects.hasChanged) {
+            DestroyPlacing();
+            placeableObjects.hasChanged = false;
+        }
 
-        if(placing == null){
-            placing = Instantiate(placeableObjects.Current(), hit.point, new quaternion(0, 0, 0, 0), hit.transform.parent);
-            foreach (var collider in placing.GetComponentsInChildren<Collider>())
+        if(objectToBePlaced == null){
+            objectToBePlaced = Instantiate(placeableObjects.Current(), hit.point, new quaternion(0, 0, 0, 0), hit.transform.parent);
+            foreach (var collider in objectToBePlaced.GetComponentsInChildren<Collider>())
                 collider.enabled = false;
         }
         else{
-            placing.transform.position = hit.point;
+            objectToBePlaced.transform.position = hit.point;
         }
 
-        foreach (Renderer renderer in placing.GetComponentsInChildren<Renderer>()){
-            if(renderer.gameObject.layer == 25) ;
+        if( !snapped && roundingPosition ) {
+            RoundPosition();
+        }
+
+        foreach (Renderer renderer in objectToBePlaced.GetComponentsInChildren<Renderer>()){
+            if(renderer.gameObject.layer == 25) {}
             else if(isPlaceable) renderer.material = tempPlacingMaterial;
             else renderer.material = tempPlacingMaterialRed;
         }
@@ -77,13 +85,19 @@ public class BuildingTool : MonoBehaviour
         }
 
     }
+    
+    private void OnDisable() {
+
+        DestroyPlacing();
+        
+    }
 
 
     //------------------------- Destroy placing -------------------------//
     private void DestroyPlacing() {
         
-        if(placing != null) Destroy(placing);
-        placing = null;
+        if(objectToBePlaced != null) Destroy(objectToBePlaced);
+        objectToBePlaced = null;
 
     }
     ///////////////////////////////////////////////////////////////////////
@@ -108,12 +122,12 @@ public class BuildingTool : MonoBehaviour
     private void HandleRotation()
     {
         if(snapped){
-            placing.transform.rotation = new quaternion(0, 0, 0, 0);
+            objectToBePlaced.transform.rotation = hit.collider.transform.rotation;
         }
 
-        else if(player.IsFreeLooking() && (snapped == false)){
+        else if(player.isFreeLooking && (snapped == false)){
 
-            if( placing.GetComponentInChildren<RotationHandler>() == null ) Instantiate(rotator, hit.point, new quaternion(0, 0, 0, 0), placing.transform);
+            if( objectToBePlaced.GetComponentInChildren<RotationHandler>() == null ) Instantiate(rotator, objectToBePlaced.transform.position, new quaternion(0, 0, 0, 0), objectToBePlaced.transform);
 
             if(Input.GetKeyDown(KeyCode.Mouse0)){
 
@@ -139,26 +153,37 @@ public class BuildingTool : MonoBehaviour
 
                 intesectionPoint = player.GetInteractRay().origin + player.GetInteractRay().direction * distance;
 
-                
+
                 if(Input.GetKeyDown(KeyCode.Mouse0)) {
-                    lastAngle = 0;
                     firstVectorToIntersectionPoint = intesectionPoint - rotationAxis.transform.position;
+                    initialRotation = objectToBePlaced.transform.rotation;
                 }
 
                 float currentAngle = Vector3.SignedAngle(firstVectorToIntersectionPoint, intesectionPoint - rotationAxis.transform.position, rotationAxis.transform.up);
-                float deltaAngle = currentAngle - lastAngle;
-                lastAngle = currentAngle;
+                float snappedAngle = Mathf.Round(currentAngle / 15) * 15;
                 
+                objectToBePlaced.transform.rotation = initialRotation;
                 // Calculate the rotation dependant on what axis you selected
-                placing.transform.Rotate(Vector3.Dot(placing.transform.right, rotationAxis.transform.up)*deltaAngle, Vector3.Dot(placing.transform.up, rotationAxis.transform.up)*deltaAngle, Vector3.Dot(placing.transform.forward, rotationAxis.transform.up)*deltaAngle);
+                objectToBePlaced.transform.Rotate(Vector3.Dot(objectToBePlaced.transform.right, rotationAxis.transform.up)*snappedAngle, Vector3.Dot(objectToBePlaced.transform.up, rotationAxis.transform.up)*snappedAngle, Vector3.Dot(objectToBePlaced.transform.forward, rotationAxis.transform.up)*snappedAngle);
                 
             }
             
         }
         
-        else if( placing.GetComponentInChildren<RotationHandler>() != null ) Destroy(placing.GetComponentInChildren<RotationHandler>().gameObject);
+        else if( objectToBePlaced.GetComponentInChildren<RotationHandler>() != null ) Destroy(objectToBePlaced.GetComponentInChildren<RotationHandler>().gameObject);
     }
     ///////////////////////////////////////////////////////////////////////
+    
+    //------------------------- Round Position -------------------------//
+    private void RoundPosition()
+    {
+        float x = Mathf.Round(objectToBePlaced.transform.localPosition.x * 4) / 4;
+        float y = Mathf.Round(objectToBePlaced.transform.localPosition.y * 4) / 4;
+        float z = Mathf.Round(objectToBePlaced.transform.localPosition.z * 4) / 4;
+
+        objectToBePlaced.transform.localPosition = new Vector3(x, y, z);
+    }
+    //////////////////////////////////////////////////////////////////////
 
 
     //------------------------- Check Placeability -------------------------//
@@ -192,14 +217,14 @@ public class BuildingTool : MonoBehaviour
     //------------------------- Place object -------------------------//
     private void Place()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0) && isPlaceable && (player.IsFreeLooking() == false)){
+        if(Input.GetKeyDown(KeyCode.Mouse0) && isPlaceable && (player.isFreeLooking == false)){
             if(snapped){
-                Instantiate(placeableObjects.Current(), hit.point, placing.transform.rotation, hit.collider.transform).tag = "Placed";
+                Instantiate(placeableObjects.Current(), objectToBePlaced.transform.position, objectToBePlaced.transform.rotation, hit.transform.parent).tag = "Placed";
                 hit.collider.enabled = false;
             }
 
             else
-                Instantiate(placeableObjects.Current(), hit.point, placing.transform.rotation, hit.transform.parent).tag = "Placed";
+                Instantiate(placeableObjects.Current(), objectToBePlaced.transform.position, objectToBePlaced.transform.rotation, hit.transform.parent).tag = "Placed";
 
         }
     }

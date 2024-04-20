@@ -19,6 +19,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
 
     [Space(7)]
+    [SerializeField] private float groundCheckSphereRadius;
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private float groundCheckDistanceCrouch;
+
+    [Space(7)]
     [Header("Key Binds")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode sprint = KeyCode.LeftShift;
@@ -82,6 +87,8 @@ public class PlayerMovement : MonoBehaviour
         Drag();
     }
 
+
+
     void GetMovement()
     {
         if(crouching){
@@ -97,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         forwardInput = Input.GetAxisRaw("Vertical");
         rightInput = Input.GetAxisRaw("Horizontal");
 
-        moveDirection = transform.forward * forwardInput + transform.right * rightInput;
+        moveDirection = (transform.forward * forwardInput + transform.right * rightInput).normalized;
         if(grounded){
             moveSpeed *= Mathf.Pow(1 + Vector3.Dot(moveDirection, hitInfo.normal), 1.3f); // make the player slower on steeper terrain by multiplying movespeed by the dot product + 1
             moveDirection = Vector3.ProjectOnPlane(moveDirection, hitInfo.normal);
@@ -115,17 +122,16 @@ public class PlayerMovement : MonoBehaviour
             moveForce = (moveDirection.normalized * airSpeed * 62) - (transform.up * 9.81f * 62);
         }
 
-        try {rb.AddForce(moveForce, ForceMode.Force);}
-        catch {} // do nothing
+        rb.AddForce(moveForce, ForceMode.Force);
     }
 
     void GroundCheck()
     {
         if(crouching){
-            grounded = Physics.SphereCast(transform.position, 0.495f, -transform.up, out hitInfo, 0.02f, mask);
+            grounded = Physics.SphereCast(transform.position, groundCheckSphereRadius, -transform.up, out hitInfo, groundCheckDistanceCrouch, mask);
         }
         else
-            grounded = Physics.SphereCast(transform.position, 0.495f, -transform.up, out hitInfo, 0.51f, mask);
+            grounded = Physics.SphereCast(transform.position, groundCheckSphereRadius, -transform.up, out hitInfo, groundCheckDistance, mask);
     }
 
     void Drag()
@@ -151,5 +157,16 @@ public class PlayerMovement : MonoBehaviour
     void ResetJump()
     {
         readyToJump = true;
+    }
+
+    public void Teleport(Transform to)
+    {
+        transform.position = to.position;
+        transform.rotation = to.rotation;
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(transform.position-transform.up*groundCheckDistanceCrouch, groundCheckSphereRadius);
+        Gizmos.DrawWireSphere(transform.position-transform.up*groundCheckDistance, groundCheckSphereRadius);
     }
 }
