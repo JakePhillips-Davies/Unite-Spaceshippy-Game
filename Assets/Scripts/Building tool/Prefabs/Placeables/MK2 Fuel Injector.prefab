@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25912471196566170}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2103311393903137855}
-  m_Father: {fileID: 5798397559710702184}
+  m_Father: {fileID: 4781152169810863812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1308660545776560713
 MonoBehaviour:
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 8417984196719223240}
   - component: {fileID: 3064632085961382197}
   m_Layer: 29
-  m_Name: MK2 Fuel Injector Lights
+  m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 8093376822536533889}
   - component: {fileID: 258480705598682948}
   m_Layer: 29
-  m_Name: MK2 Fuel Injector
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,9 +267,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5771549569030962811}
-  - {fileID: 4473195823536355973}
+  m_Children: []
   m_Father: {fileID: 4781152169810863812}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &759498400371548052
@@ -354,6 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4781152169810863812}
   - component: {fileID: -7514757903357999908}
+  - component: {fileID: 4117549884404999860}
   m_Layer: 29
   m_Name: MK2 Fuel Injector
   m_TagString: Untagged
@@ -374,6 +373,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5771549569030962811}
+  - {fileID: 4473195823536355973}
   - {fileID: 5798397559710702184}
   - {fileID: 8332910550906747542}
   m_Father: {fileID: 0}
@@ -393,6 +394,23 @@ MonoBehaviour:
   placeableAnywhere: 0
   tags:
   - Fuel Injector Snap
+--- !u!114 &4117549884404999860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263066698040981765}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6958da24705f94086e0272942b2ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTypicalFlowRate: 10
+  fuelContainer: {fileID: 1308660545776560713}
+  coolantContainer: {fileID: 2164820880547900656}
+  engineNozzle: {fileID: 0}
+  maxTempTolerance: 1000
 --- !u!1 &7124667100001339955
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,13 +516,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8891309744325845851}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8033457121573801333}
-  m_Father: {fileID: 5798397559710702184}
+  m_Father: {fileID: 4781152169810863812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2164820880547900656
 MonoBehaviour:

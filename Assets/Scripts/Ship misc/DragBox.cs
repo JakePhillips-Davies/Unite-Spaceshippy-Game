@@ -7,7 +7,9 @@ public class DragBox : MonoBehaviour
 {
     [SerializeField] Transform ship;
 
-    public Boolean tmp;
+    public Rigidbody GetShipRB() {
+        return ship.gameObject.GetComponent<Rigidbody>();
+    }
 
     private void FixedUpdate() {
         transform.SetPositionAndRotation(ship.transform.position, ship.transform.rotation);

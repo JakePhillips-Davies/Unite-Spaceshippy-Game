@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4781152169810863812}
   - component: {fileID: -7098805536540945661}
+  - component: {fileID: 8607698617869599198}
   m_Layer: 29
   m_Name: Orion Large Engine Bell
   m_TagString: Untagged
@@ -49,6 +50,21 @@ MonoBehaviour:
   placeableAnywhere: 0
   tags:
   - Large Engine Snap
+--- !u!114 &8607698617869599198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263066698040981765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e6f6b8cc7625249a2a905764700e41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificImpulse: 30000
+  ship: {fileID: 0}
+  thrust: 0
 --- !u!1 &6282079092603615009
 GameObject:
   m_ObjectHideFlags: 0

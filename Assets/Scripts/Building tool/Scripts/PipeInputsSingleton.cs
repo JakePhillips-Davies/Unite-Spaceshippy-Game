@@ -33,6 +33,14 @@ public class PipeInputsSingleton : MonoBehaviour
 
     public void DisplayInputSnaps(){
 
+        inputsList = new List<GameObject>();
+
+        foreach (GameObject obj in FindObjectsByType<GameObject>(FindObjectsSortMode.None)){
+            if(obj.layer == LayerMask.NameToLayer("Snapping Point Pipe Input")) {
+                inputsList.Add(obj);
+            }
+        }
+
         foreach (GameObject pipeInput in inputsList){
 
             if((pipeInput.transform.childCount <= 0) && pipeInput.GetComponent<Collider>().enabled) {
