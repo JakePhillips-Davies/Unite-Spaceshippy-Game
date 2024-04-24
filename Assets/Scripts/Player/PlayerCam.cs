@@ -70,7 +70,6 @@ public class PlayerCam : MonoBehaviour
         panel.SetActive(false);
 
         if(Physics.Raycast(transform.position, transform.forward, out hit, interactionReach, LayerMask.GetMask("Activator"))){
-            Debug.Log(hit.collider);
             if(Input.GetKeyDown(interactkey) && (hit.transform != null) && (hit.collider.GetComponent<Activator>() != null))
                 hit.collider.GetComponent<Activator>().Activate();
 

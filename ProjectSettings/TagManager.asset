@@ -10,6 +10,8 @@ TagManager:
   - Small Engine Snap
   - Fuel Injector Snap
   - Coolant Pipe Snap
+  - Fuel Pipe Snap
+  - Pipe Align Snap
   layers:
   - Default
   - TransparentFX
@@ -34,7 +36,7 @@ TagManager:
   - 
   - 
   - Activator
-  - 
+  - Snapping Point Pipe Input
   - Snapping Point
   - Rotate Handle
   - 

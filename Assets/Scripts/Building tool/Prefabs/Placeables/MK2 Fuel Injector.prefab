@@ -1,5 +1,135 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &25912471196566170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5771549569030962811}
+  - component: {fileID: 1308660545776560713}
+  m_Layer: 29
+  m_Name: FuelContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5771549569030962811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25912471196566170}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2103311393903137855}
+  m_Father: {fileID: 5798397559710702184}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1308660545776560713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25912471196566170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a08bc81e96322440b4e57760a1f096c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fluidAmount: 0
+  fluidMax: 1000
+  flowRateBase: 0
+  type: 0
+  outputs: []
+--- !u!1 &1194301467723551609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2103311393903137855}
+  - component: {fileID: 8030724128991706533}
+  - component: {fileID: 3022016496378392050}
+  - component: {fileID: 2386334564811420614}
+  m_Layer: 23
+  m_Name: FuelInput
+  m_TagString: Pipe Align Snap
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2103311393903137855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194301467723551609}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0.207449, y: 3.5021815, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5771549569030962811}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!135 &8030724128991706533
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194301467723551609}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3022016496378392050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194301467723551609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8a1da5a5462414c8faa071e560a33f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2386334564811420614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194301467723551609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b311343e552ad9e4b9827147920a7369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputsTo: {fileID: 1308660545776560713}
 --- !u!1 &1222802732540278015
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +267,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5771549569030962811}
+  - {fileID: 4473195823536355973}
   m_Father: {fileID: 4781152169810863812}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &759498400371548052
@@ -244,7 +376,6 @@ Transform:
   m_Children:
   - {fileID: 5798397559710702184}
   - {fileID: 8332910550906747542}
-  - {fileID: 8538279074401468621}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-7514757903357999908
@@ -262,7 +393,7 @@ MonoBehaviour:
   placeableAnywhere: 0
   tags:
   - Fuel Injector Snap
---- !u!1 &8925426231023421323
+--- !u!1 &7124667100001339955
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,38 +401,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8538279074401468621}
-  - component: {fileID: 305299258126133591}
-  - component: {fileID: 4809319904106264832}
-  m_Layer: 24
-  m_Name: SnappingPoint
-  m_TagString: Coolant Pipe Snap
+  - component: {fileID: 8033457121573801333}
+  - component: {fileID: 2107184529040516335}
+  - component: {fileID: 6610369305628177592}
+  - component: {fileID: 2116748091330807702}
+  m_Layer: 23
+  m_Name: CoolantInput
+  m_TagString: Pipe Align Snap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8538279074401468621
+--- !u!4 &8033457121573801333
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8925426231023421323}
+  m_GameObject: {fileID: 7124667100001339955}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29311287, y: -0.22429435, z: -0.5662355, w: 0.73699003}
-  m_LocalPosition: {x: 0.9911, y: 0.2681, z: -2.4662}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0.8012, y: 2.4136508, z: 0.21600318}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 4781152169810863812}
-  m_LocalEulerAnglesHint: {x: 10.255, y: -42.323, z: -79.05}
---- !u!135 &305299258126133591
+  m_Father: {fileID: 4473195823536355973}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!135 &2107184529040516335
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8925426231023421323}
+  m_GameObject: {fileID: 7124667100001339955}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -316,15 +448,78 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4809319904106264832
+--- !u!114 &6610369305628177592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8925426231023421323}
+  m_GameObject: {fileID: 7124667100001339955}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a8a1da5a5462414c8faa071e560a33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2116748091330807702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7124667100001339955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b311343e552ad9e4b9827147920a7369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputsTo: {fileID: 2164820880547900656}
+--- !u!1 &8891309744325845851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4473195823536355973}
+  - component: {fileID: 2164820880547900656}
+  m_Layer: 29
+  m_Name: CoolantContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4473195823536355973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8891309744325845851}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8033457121573801333}
+  m_Father: {fileID: 5798397559710702184}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2164820880547900656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8891309744325845851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a08bc81e96322440b4e57760a1f096c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fluidAmount: 0
+  fluidMax: 100
+  flowRateBase: 0
+  type: 1
+  outputs: []
