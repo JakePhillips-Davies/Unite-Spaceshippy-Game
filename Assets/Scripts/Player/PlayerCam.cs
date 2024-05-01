@@ -1,5 +1,8 @@
 using System;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 
 public class PlayerCam : MonoBehaviour
@@ -40,22 +43,37 @@ public class PlayerCam : MonoBehaviour
             yRot += Input.GetAxisRaw("Mouse X") * sensitivity;
 
             xRot -= Input.GetAxisRaw("Mouse Y") * sensitivity;
-            xRot = Mathf.Clamp(xRot, -90f, 90f);
 
-            transform.localRotation = Quaternion.Euler(xRot, 0, 0);
-            body.transform.localRotation = Quaternion.Euler(0, yRot, 0);
+            transform.Rotate(xRot, 0, 0, Space.Self);
+            Vector3 eulerAngles = transform.localEulerAngles;
+            if((eulerAngles.x > 180) && (eulerAngles.y >= 180)) eulerAngles.x = 270;
+            if((eulerAngles.x < 180) && (eulerAngles.y >= 180)) eulerAngles.x = 90;
+            transform.localRotation = Quaternion.Euler(eulerAngles.x, 0, 0);
+
+            body.transform.Rotate(0, yRot, 0, Space.Self);
+            body.transform.localRotation = Quaternion.Euler(0, body.transform.localEulerAngles.y, 0);
+            xRot = 0;
+            yRot = 0;
         }
         else{
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
-            transform.localRotation = Quaternion.Euler(xRot, 0, 0);
-            body.transform.localRotation = Quaternion.Euler(0, yRot, 0);
         }
 
-        interactRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+        interactRay = gameObject.GetComponent<Camera>().ScreenPointToRay (Input.mousePosition);
 
         activatableHandler();
 
-        if(Input.GetKeyDown(buildingToolKey)) buildingTool.SetActive(!buildingTool.activeSelf);
+        if(Input.GetKeyDown(buildingToolKey) && (buildingTool != null)) buildingTool.SetActive(!buildingTool.activeSelf);
+    }
+
+    private void OnEnable() {
+        if(buildingTool != null) buildingTool.SetActive(false);
+        Cursor.visible = true;
+
+    }
+    private void OnDisable() {
+         if(buildingTool != null) buildingTool.SetActive(false);
     }
 
     private void OnDrawGizmos() {

@@ -151,4 +151,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeableAnywhere: 1
+  tex: {fileID: 2800000, guid: 6f148ed4efb3aa94490b0e06fef88841, type: 3}
   tags: []

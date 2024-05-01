@@ -11,6 +11,14 @@ public class EngineBell : MonoBehaviour
         FindShip();    
     }
 
+    private void FixedUpdate() {
+        thrust = 0;
+    }
+    
+    public float GetThrust() {
+        return thrust;
+    }
+
     private void FindShip() {
         Transform searching = transform;
         while (searching.parent != null)

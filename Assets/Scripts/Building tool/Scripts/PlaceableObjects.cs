@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class PlaceableObjects : MonoBehaviour
@@ -27,7 +22,6 @@ public class PlaceableObjects : MonoBehaviour
 
     private void Start() {
         hasChanged = false;
-        AssetPreview.SetPreviewTextureCacheSize(placeableObjects.Count + 10);
         ListItems();
     }
 
@@ -45,29 +39,19 @@ public class PlaceableObjects : MonoBehaviour
 
         for( int i = 0; i < placeableObjects.Count; i++)
         {
-            StartCoroutine(LoadItem(i));
-        }
-    }
-
-    IEnumerator LoadItem(int i){
-
-        AssetPreview.GetAssetPreview(placeableObjects[i]);
-
-        yield return new WaitUntil(() => AssetPreview.IsLoadingAssetPreview(placeableObjects[i].GetInstanceID()) == false);
-
-        Texture2D tex = AssetPreview.GetAssetPreview(placeableObjects[i]);
+            Texture2D tex = placeableObjects[i].GetComponent<PlaceableObject>().tex;
         
-        GameObject obj = Instantiate(ItemUI, listUI.transform);
-        Text itemName = obj.transform.Find("ItemName").GetComponentInChildren<Text>();
-        Image itemIcon = obj.transform.Find("ItemIcon").GetComponentInChildren<Image>();
-        ItemID itemID = obj.GetComponent<ItemID>();
+            GameObject obj = Instantiate(ItemUI, listUI.transform);
+            Text itemName = obj.transform.Find("ItemName").GetComponentInChildren<Text>();
+            Image itemIcon = obj.transform.Find("ItemIcon").GetComponentInChildren<Image>();
+            ItemID itemID = obj.GetComponent<ItemID>();
 
-        itemID.ID = i;
+            itemID.ID = i;
 
-        itemName.text = placeableObjects[i].name;
+            itemName.text = placeableObjects[i].name;
 
-        itemIcon.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100);
-
+            itemIcon.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100);
+        }
     }
 
 }

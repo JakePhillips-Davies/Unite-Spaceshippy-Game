@@ -1,10 +1,12 @@
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuildingTool : MonoBehaviour
 {
     [Header("------------")]
+    [SerializeField] private GameObject buildingCam;
     [SerializeField] private PlayerCam player;
     [SerializeField] private GameObject rotator;
     [SerializeField] private PlaceableObjects placeableObjects;
@@ -76,6 +78,10 @@ public class BuildingTool : MonoBehaviour
         }
 
     }
+
+    private void OnEnable() {
+        buildingCam.SetActive(true);
+    }
     
     private void OnDisable() {
 
@@ -88,6 +94,8 @@ public class BuildingTool : MonoBehaviour
         alignMode = false;
 
         PipeInputsSingleton.pipeInputs.DestroyDisplayInputSnaps();
+
+        buildingCam.SetActive(false);
         
     }
 
@@ -117,6 +125,11 @@ public class BuildingTool : MonoBehaviour
                 objectToBePlaced = Instantiate(placeableObjects.Current(), hit.point, new quaternion(0, 0, 0, 0), hit.transform.parent);
                 foreach (var collider in objectToBePlaced.GetComponentsInChildren<Collider>())
                     collider.enabled = false;
+                foreach (Transform obj in objectToBePlaced.GetComponentsInChildren<Transform>())
+                {
+                    if(obj.gameObject.layer != LayerMask.NameToLayer("Ship Interior")) obj.gameObject.layer = LayerMask.NameToLayer("Ship Interior");
+                }
+                
             }
             else{
                 objectToBePlaced.transform.position = hit.point;

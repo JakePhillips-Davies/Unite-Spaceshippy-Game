@@ -14,7 +14,22 @@ public class FuelInjector : MonoBehaviour
     private float temp;
 
     private void Awake() {
-        engineNozzle = transform.parent.GetComponent<EngineBell>();
+        engineNozzle = GetNozzle();
+    }
+
+    public EngineBell GetNozzle() {
+        return transform.parent.GetComponent<EngineBell>();
+    }
+
+    public float GetFuelLevel() {
+        return fuelContainer.GetFluidAmount();
+    }
+    public float GetFuelMax() {
+        return fuelContainer.GetFluidMax();
+    }
+
+    public FluidContainer GetFuelContainer() {
+        return fuelContainer;
     }
 
 
@@ -37,7 +52,7 @@ public class FuelInjector : MonoBehaviour
     }
 
     private void CalculateFlowRate() {
-        float fuelPercentage = fuelContainer.GetFluidAmount() / fuelContainer.GetFluidMax();
+        float fuelPercentage = GetFuelLevel() / GetFuelMax();
 
         if( fuelPercentage <= 0 ) flowRate = 0;
         else flowRate = maxTypicalFlowRate * Mathf.Pow(fuelPercentage, 2);
@@ -45,7 +60,7 @@ public class FuelInjector : MonoBehaviour
 
     private void CombustFuel() {
         engineNozzle.ApplyThrust(flowRate);
-        fuelContainer.SetFluidAmount(fuelContainer.GetFluidAmount() - flowRate);
+        fuelContainer.SetFluidAmount(GetFuelLevel() - flowRate);
     }
 
     private void CalculateHeat() {

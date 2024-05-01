@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeableAnywhere: 1
+  tex: {fileID: 2800000, guid: c0e7f1a625d374a4291cbb075213abdc, type: 3}
   tags: []
 --- !u!1 &6869760626173997869
 GameObject:
